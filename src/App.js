@@ -1,23 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import { createBrowserHistory } from "history";
+export const history = createBrowserHistory();
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h2 className="text-blue-500 text-[40px]">
+        Hello nhom 14 cung nhau giup do co gang hoan thanh tot nhe!
+      </h2>
     </div>
   );
 }
