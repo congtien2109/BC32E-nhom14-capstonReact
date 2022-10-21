@@ -1,13 +1,16 @@
 import "./App.css";
 import { createBrowserHistory } from "history";
+import { Router, Switch } from "react-router";
+import { HomeTemplate } from "./templates/HomeTemplate/HomeTemplate";
+import Home from "./pages/home/Home";
 export const history = createBrowserHistory();
 function App() {
   return (
-    <div className="App">
-      <h2 className="text-blue-500 text-[40px]">
-        Hello nhom 14 cung nhau giup do co gang hoan thanh tot nhe!
-      </h2>
-    </div>
+    <Router history={history}>
+      <Switch>
+        <HomeTemplate path="/" exact Component={Home} />
+      </Switch>
+    </Router>
   );
 }
 
