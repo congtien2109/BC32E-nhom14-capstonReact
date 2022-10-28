@@ -6,7 +6,6 @@ export default function Header(props) {
     <header className="p-4 bg-gray-800 text-gray-100 bg-opacity-40 fixed w-full z-10">
       <div className="container flex justify-between h-16 mx-auto">
         <a
-          rel="noopener noreferrer"
           href="#"
           aria-label="Back to homepage"
           className="flex items-center p-2"
@@ -18,24 +17,33 @@ export default function Header(props) {
         </a>
         <ul className="items-stretch hidden space-x-3 lg:flex">
           <li className="flex">
-            <a
-              rel="noopener noreferrer"
-              href="#"
-              className="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent text-white"
+            <NavLink
+              to="/home"
+              className="flex items-center px-4 -mb-1 text-white"
+              activeClassName="border-b-2 border-white"
             >
-              Link
-            </a>
+              Home
+            </NavLink>
           </li>
           <li className="flex">
-            <a
-              rel="noopener noreferrer"
-              href="#"
-              className="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent text-white"
+            <NavLink
+              to="/contact"
+              className="flex items-center px-4 -mb-1 text-white"
+              activeClassName="border-b-2 border-white"
             >
-              Link
-            </a>
+              Contact
+            </NavLink>
           </li>
           <li className="flex">
+            <NavLink
+              to="/news"
+              className="flex items-center px-4 -mb-1 text-white"
+              activeClassName="border-b-2 border-white"
+            >
+              News
+            </NavLink>
+          </li>
+          {/* <li className="flex">
             <a
               rel="noopener noreferrer"
               href="#"
@@ -43,20 +51,11 @@ export default function Header(props) {
             >
               Link
             </a>
-          </li>
-          <li className="flex">
-            <a
-              rel="noopener noreferrer"
-              href="#"
-              className="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent text-white"
-            >
-              Link
-            </a>
-          </li>
+          </li> */}
         </ul>
         <div className="items-center flex-shrink-0 hidden lg:flex">
           <button className="self-center px-8 py-3 rounded">Sign in</button>
-          <button className="self-center px-8 py-3 font-semibold rounded dark:bg-violet-400 dark:text-gray-900">
+          <button className="self-center px-8 py-3 font-semibold rounded bg-violet-400 dark:text-gray-900">
             Sign up
           </button>
         </div>
