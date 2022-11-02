@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Carousel } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { getCarouselAction } from "../../../../redux/action/CarouselAction";
+import "./HomeCarousel.css";
 
 export default function HomeCarousel(props) {
   const { arrImg } = useSelector((state) => state.CarouselReducer);
@@ -40,5 +41,9 @@ export default function HomeCarousel(props) {
     });
   };
 
-  return <Carousel autoplay>{renderImg()}</Carousel>;
+  return (
+    <Carousel autoplay style={{ width: "100%", padding: 0, margin: 0 }}>
+      {renderImg()}
+    </Carousel>
+  );
 }
