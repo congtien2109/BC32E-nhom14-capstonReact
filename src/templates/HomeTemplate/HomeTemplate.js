@@ -12,7 +12,6 @@ export const HomeTemplate = (props) => {
         return (
           <Fragment>
             <Header {...propsRoute} />
-            <HomeCarousel {...propsRoute} />
             <Component {...propsRoute} />
             <hr className="mt-20" />
             <Footer className="container mx-auto px-20" />
