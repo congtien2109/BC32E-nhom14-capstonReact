@@ -10,7 +10,6 @@ const stateDefault = {
   chiTietPhongVe: new ThongTinLichChieu(),
   danhSachGheDangDat: [], //danh sách ghế đang đặt
   danhSachGheKhachDat: [],
-  // [{maGhe:48041},{maGhe:48042}],
   tabActive: "1",
 };
 
@@ -28,7 +27,7 @@ export const QuanLyDatVeReducer = (state = stateDefault, action) => {
       let index = danhSachGheCapNhat.findIndex(
         (gheDD) => gheDD.maGhe === action.gheDuocChon.maGhe
       );
-      if (index != -1) {
+      if (index !== -1) {
         //Nếu tìm thấy ghế được chọn trong mảng có nghĩa là trước đó đã click vào rồi => xoá đi
         danhSachGheCapNhat.splice(index, 1);
       } else {

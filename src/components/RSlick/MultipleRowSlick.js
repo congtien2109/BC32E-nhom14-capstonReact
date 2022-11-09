@@ -8,6 +8,7 @@ import Film from "../Film/Film";
 import FilmFlip from "../Film/FilmFlip";
 import styleSlick from "./MultipleRowSlick.module.css";
 import { useDispatch, useSelector } from "react-redux";
+import "./MultipleRowSlick.scss";
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
   return (
@@ -62,17 +63,64 @@ const MultipleRowSlick = (props) => {
     centerMode: true,
     infinite: true,
     centerPadding: "60px",
-    slidesToShow: 2,
+    slidesToShow: 4,
     speed: 500,
     rows: 2,
-    slidesPerRow: 2,
+    slidesPerRow: 1,
+    initialSlide: 0,
     variableWidth: true,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
+    responsive: [
+      {
+        breakpoint: 320,
+        settings: {
+          rows: 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: false,
+        },
+      },
+      {
+        breakpoint: 576,
+        settings: {
+          rows: 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: false,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          rows: 2,
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          infinite: false,
+        },
+      },
+      {
+        breakpoint: 992,
+        settings: {
+          slidesToShow: 3,
+          rows: 2,
+          slidesToScroll: 2,
+          infinite: false,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          rows: 2,
+          slidesToShow: 3,
+          slidesToScroll: 2,
+          infinite: false,
+        },
+      },
+    ],
   };
   return (
-    <div>
-      {/* <h2>Multiple Rows</h2> */}
+    <div className="container">
       <button
         className={`${styleSlick[activeClassDC]} px-8 py-3 font-semibold rounded bg-gray-800 text-white mr-2`}
         onClick={() => {

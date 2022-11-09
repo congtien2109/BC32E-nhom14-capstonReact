@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { layDanhSachPhimAction } from "../../redux/action/QuanLyPhimAction";
 import { layDanhSachHeThongRapAction } from "../../redux/action/QuanLyRapAction";
 import HomeCarousel from "../../templates/HomeTemplate/Layout/HomeCarousel/HomeCarousel";
+import "./Home.scss";
 export default function Home(props) {
   const { arrFilm } = useSelector((state) => state.QuanLyPhimReducer);
   const { heThongRapChieu } = useSelector((state) => state.QuanLyRapReducer);
@@ -22,7 +23,7 @@ export default function Home(props) {
       <HomeCarousel />
 
       <section className="text-gray-600 body-font">
-        <div className="container mx-auto px-20 py-24">
+        <div className="section-body container mx-auto px-20 py-24">
           <MultipleRowSlick arrFilm={arrFilm} />
         </div>
       </section>

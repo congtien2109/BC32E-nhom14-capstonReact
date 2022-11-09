@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Carousel } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { getCarouselAction } from "../../../../redux/action/CarouselAction";
-import "./HomeCarousel.css";
+import "./HomeCarousel.scss";
 
 export default function HomeCarousel(props) {
   const { arrImg } = useSelector((state) => state.CarouselReducer);
