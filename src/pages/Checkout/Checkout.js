@@ -14,7 +14,6 @@ import {
   HomeOutlined,
 } from "@ant-design/icons";
 import "./Checkout.css";
-import { CHUYEN_TAB, DAT_VE } from "../../redux/types/QuanLyDatVeType";
 import _ from "lodash";
 import { ThongTinDatVe } from "../../_core/models/ThongTinDatVe";
 import { datVeAction } from "../../redux/action/QuanLyDatVeActions";
@@ -297,7 +296,6 @@ function Checkout(props) {
                 thongTinDatVe.danhSachVe = danhSachGheDangDat;
 
                 console.log(thongTinDatVe);
-
                 dispatch(datVeAction(thongTinDatVe));
               }}
               className="bg-green-500 text-white w-full text-center py-3 font-bold text-2xl cursor-pointer"
@@ -485,18 +483,7 @@ function KetQuaDatVe(props) {
               Hãy xem thông tin địa và thời gian để xem phim vui vẻ bạn nhé !
             </p>
           </div>
-          <div className="flex flex-wrap -m-2">
-            {renderTicketItem()}
-            {/* <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
-                        <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-                            <img alt="team" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="https://picsum.photos/200/200" />
-                            <div className="flex-grow">
-                                <h2 className="text-gray-900 title-font font-medium">Lật mặt 48h</h2>
-                                <p className="text-gray-500">10:20 Rạp 5, Hệ thống rạp cinestar bhd </p>
-                            </div>
-                        </div>
-                    </div> */}
-          </div>
+          <div className="flex flex-wrap -m-2">{renderTicketItem()}</div>
         </div>
       </section>
     </div>

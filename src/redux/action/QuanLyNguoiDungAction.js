@@ -1,5 +1,6 @@
 import { quanLyNguoiDungService } from "../../services/QuanLyNguoiDung";
 import {
+  DANG_KY_ACTION,
   DANG_NHAP_ACTION,
   SET_THONG_TIN_NGUOI_DUNG,
 } from "../types/QuanLyNguoiDungType";
@@ -41,6 +42,49 @@ export const layThongTinNguoiDungAction = (thongTinDangNhap) => {
       console.log("result", result);
     } catch (error) {
       console.log("error", error.response.data);
+    }
+  };
+};
+
+export const dangKyAction = (thongTinDangKy) => {
+  return async (dispatch) => {
+    try {
+      const result = await quanLyNguoiDungService.dangKy(thongTinDangKy);
+      alert("Đăng ký tài khoản thành công !");
+      console.log("result: ", result);
+      if (result.status === 200) {
+        dispatch({
+          type: DANG_KY_ACTION,
+          thongTinDangKy: result.data.content,
+        });
+        // history chuyển hướng dăng ký thành công về trang login
+        // history.goBack()
+
+        history.push("/login");
+      }
+    } catch (error) {
+      console.log("error: ", error.response.data);
+    }
+  };
+};
+
+export const capNhatThongTinNguoiDungAction = (formData) => {
+  return async (dispatch) => {
+    try {
+      const result = await quanLyNguoiDungService.capNhatThongTinNguoiDung(
+        formData
+      );
+      alert("Cập nhật tài khoản thành công !");
+      console.log("result: ", result);
+
+      if (result.status === 200) {
+        dispatch({
+          type: SET_THONG_TIN_NGUOI_DUNG,
+          thongTinNguoiDung: result.data.content,
+        });
+      }
+    } catch (error) {
+      console.log("error: ", error.response.data);
     }
   };
 };

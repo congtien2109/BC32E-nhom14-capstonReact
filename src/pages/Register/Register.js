@@ -2,34 +2,65 @@ import { useFormik } from "formik";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { dangNhapAction } from "../../redux/action/QuanLyNguoiDungAction";
-
+import {
+  dangKyAction,
+  dangNhapAction,
+} from "../../redux/action/QuanLyNguoiDungAction";
+import * as Yup from "yup";
 export default function Register(props) {
   const dispatch = useDispatch();
 
-  const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
-
-  console.log("userLogin", userLogin);
+  const { userRegister } = useSelector((state) => state.QuanLyNguoiDungReducer);
+  console.log("userRegister: ", userRegister);
 
   const formik = useFormik({
     initialValues: {
       taiKhoan: "",
       matKhau: "",
+      email: "",
+      confirm_matKhau: "",
+      soDt: "",
+      maNhom: "",
+      hoTen: "",
     },
+    validationSchema: Yup.object({
+      taiKhoan: Yup.string()
+        .matches(/^[aA-zZ\s]+$/, "phải là ký tự !")
+        .min(5, "từ 5 ký tự đến 15 ký tự !")
+        .max(15, "tối đa 15 ký tự !")
+        .required("không được bỏ trống!"),
+      email: Yup.string()
+        .email("không đúng định dạng!")
+        .required("không được bỏ trống!"),
+      matKhau: Yup.string()
+        .matches(/^[0-9]+$/, "là số từ 0 đến 9!")
+        .min(8, "tối thiểu 8 ký tự")
+        .required("không được bỏ trống!"),
+      confirm_matKhau: Yup.string()
+        .oneOf([Yup.ref("matKhau")], "nhập lại không đúng!")
+        .required("không được bỏ trống!"),
+      soDt: Yup.string()
+        .min(10, "bắt buộc phải là số và là 10 số !")
+        .required("không được bỏ trống!"),
+      hoTen: Yup.string()
+        .matches(/^[aA-zZ\s]+$/, "phải là ký tự !")
+        .min(10, "từ 2 ký tự đến 50 ký tự !")
+        .max(50, "tối đa 50 ký tự !")
+        .required("không được bỏ trống!"),
+    }),
     onSubmit: (values) => {
-      const action = dangNhapAction(values);
+      // alert(JSON.stringify(values, null, 2));
+      const action = dangKyAction(values);
       dispatch(action);
-
-      console.log("values", values);
+      console.log("values: ", values);
     },
   });
-
   return (
     <form
       onSubmit={formik.handleSubmit}
       className="lg:w-1/2 xl:max-w-screen-sm"
     >
-      <div className="py-12 bg-indigo-100 lg:bg-white flex justify-center lg:justify-start lg:px-12">
+      <div className="py-6 bg-indigo-100 lg:bg-white flex justify-center lg:justify-start lg:px-12">
         <div className="cursor-pointer flex items-center">
           <div>
             <svg
@@ -62,70 +93,101 @@ export default function Register(props) {
               </g>
             </svg>
           </div>
-          <div className="text-2xl text-indigo-800 tracking-wide ml-2 font-semibold">
-            CYBERLEARN
-          </div>
+          <NavLink
+            to="/"
+            className="text-2xl text-indigo-800 tracking-wide ml-2 font-semibold"
+          >
+            CyberSoft Movie
+          </NavLink>
         </div>
       </div>
-      <div className="mt-10 px-12 sm:px-24 md:px-48 lg:px-12 lg:mt-16 xl:px-24 xl:max-w-2xl">
+      <div className="px-12 sm:px-24 md:px-48 lg:px-6 lg:mt-5 xl:px-24 xl:max-w-2xl">
         <h2
           className="text-center text-4xl text-indigo-900 font-display font-semibold lg:text-left xl:text-5xl
-      xl:text-bold"
+              xl:text-bold"
         >
-          Đăng nhập
+          Đăng ký
         </h2>
-        <div className="mt-12">
+        <div className="mt-6">
           <div>
             <div>
               <div className="text-sm font-bold text-gray-700 tracking-wide">
-                Tài khoản
+                Tài Khoản
               </div>
               <input
                 name="taiKhoan"
+                value={formik.values.taiKhoan}
+                onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
                 className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
                 placeholder="Nhập vào tài khoản"
               />
+              {formik.errors.taiKhoan && formik.touched.taiKhoan && (
+                <p className="text-red-600 text-sm">
+                  Tài khoản {formik.errors.taiKhoan}
+                </p>
+              )}
             </div>
             <div className="mt-8">
-              <div className="flex justify-between items-center">
-                <div className="text-sm font-bold text-gray-700 tracking-wide">
-                  Mật khẩu
-                </div>
-                <div>
-                  <a
-                    className="text-xs font-display font-semibold text-indigo-600 hover:text-indigo-800
-                          cursor-pointer"
-                  >
-                    Quên mật khẩu ?
-                  </a>
-                </div>
+              <div className="text-sm font-bold text-gray-700 tracking-wide">
+                {" "}
+                Mật khẩu
               </div>
+
               <input
                 type="password"
                 name="matKhau"
+                value={formik.values.matKhau}
+                onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
                 className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
                 placeholder="Nhập vào mật khẩu"
               />
+              {formik.errors.matKhau && formik.touched.matKhau && (
+                <p className="text-red-600 text-sm">
+                  Mật khẩu {formik.errors.matKhau}
+                </p>
+              )}
+            </div>
+            <div className="mt-8">
+              <div className="text-sm font-bold text-gray-700 tracking-wide">
+                {" "}
+                Nhập lại khẩu
+              </div>
+
+              <input
+                type="password"
+                name="confirm_matKhau"
+                value={formik.values.confirm_matKhau}
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
+                placeholder="Nhập lại mật khẩu"
+              />
+              {formik.errors.confirm_matKhau &&
+                formik.touched.confirm_matKhau && (
+                  <p className="text-red-600 text-sm">
+                    Mật khẩu {formik.errors.confirm_matKhau}
+                  </p>
+                )}
             </div>
             <div className="mt-10">
               <button
-                className="bg-indigo-500 text-gray-100 p-4 w-full rounded-full tracking-wide
-                  font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-indigo-600
-                  shadow-lg"
+                className="bg-indigo-500 text-gray-100 text-xl p-4 w-full rounded-full tracking-wide
+                          font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-indigo-600
+                          shadow-lg"
               >
-                Đăng nhập
+                Đăng ký
               </button>
             </div>
           </div>
-          <div className="mt-12 text-sm font-display font-semibold text-gray-700 text-center">
-            Bạn chưa có tài khoản ?{" "}
+          <div className="my-5 text-xl font-display font-semibold text-gray-700 text-center">
+            Bạn đã có tài khoản ?{" "}
             <NavLink
-              to="register"
+              to="/login"
               className="cursor-pointer text-indigo-600 hover:text-indigo-800"
             >
-              Đăng ký
+              Đăng nhập
             </NavLink>
           </div>
         </div>
